@@ -15,3 +15,10 @@ class Procedimentos(models.Model):
 
     def __str__(self):
         return self.nome
+
+class HorariosBloqueados(models.Model):
+    Horario = models.DateField()
+
+    def __str__(self):
+        return self.Horario
+
