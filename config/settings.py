@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+import os
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -33,6 +36,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "usuario",
+    "uploader",
     "Innovar",
 ]
 
@@ -108,3 +112,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_USER_MODEL = "usuario.Usuario"
+
+# App Uploader settings
+MEDIA_URL = "http://localhost:8000/media/"
+MEDIA_ENDPOINT = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+FILE_UPLOAD_PERMISSIONS = 0o640
