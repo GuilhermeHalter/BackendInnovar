@@ -4,7 +4,7 @@ from uploader.models import Image
 class Procedimentos(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=100)
-    capa = models.ForeignKey(
+    imagem = models.ForeignKey(
         Image,
         related_name="+",
         on_delete=models.CASCADE,
