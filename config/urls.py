@@ -3,11 +3,12 @@ from django.urls import include, path
 
 from rest_framework.routers import DefaultRouter
 
-from Innovar.views import PacoteViewSet, ProcedimentoViewSet
+from Innovar.views import PacoteViewSet, ProcedimentoViewSet, HorariosBloqueadoViewSet
 
 router = DefaultRouter()
 router.register(r"pacotes", PacoteViewSet)
 router.register(r"procedimentos", ProcedimentoViewSet)
+router.register(r"horario_bloqueado", HorariosBloqueadoViewSet)
 
 
 urlpatterns = [
