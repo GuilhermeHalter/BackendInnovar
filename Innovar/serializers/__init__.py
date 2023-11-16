@@ -1,0 +1,3 @@
+from .pacote import PacoteSerializer
+from .procedimento import ProcedimentoSerializer
+from .horarioblock import HorariosBloqueadoSerializer
