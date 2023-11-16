@@ -15,6 +15,8 @@ dependencies = [
     "drf-spectacular>=0.26.5",
     "python-dotenv>=1.0.0",
     "netifaces>=0.11.0",
+    "gunicorn>=21.2.0",
+    "whitenoise[brotli]>=6.6.0",
 ]
 requires-python = ">=3.10"
 readme = "README.md"
@@ -35,3 +37,7 @@ line-length = 120
 [tool.pdm.scripts]
 pre_dev = "python ./scripts/set_my_ip.py"
 dev = "python manage.py runserver 0.0.0.0:19003"
+
+[[tool.pdm.autoexport]]
+filename = "requirements.txt"
+without-hashes = "true"

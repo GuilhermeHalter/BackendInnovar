@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+MODE = os.getenv("MODE")
 SECRET_KEY = "django-insecure-3!16j%8=dgv)x$er59@-m98m1ku48)6#ykeo_r1_j7fhg6*om*"
 
 DEBUG = True
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -77,12 +78,26 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if MODE in ["PRODUCTION", "MIGRATE"]:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DATABASE_NAME"),
+            "USER": os.getenv("DATABASE_USER"),
+            "PASSWORD": os.getenv("DATABASE_PASSWORD"),
+            "HOST": os.getenv("DATABASE_HOST"),
+            "PORT": os.getenv("DATABASE_PORT"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+
+print(MODE, DATABASES)
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Livraria API",
@@ -127,7 +142,7 @@ FILE_UPLOAD_PERMISSIONS = 0o640
 
 load_dotenv()
 
-MODE = os.getenv("MODE")
+
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False")
@@ -140,4 +155,8 @@ else:
     MY_IP = os.getenv("MY_IP", "127.0.0.1")
     MEDIA_URL = f"http://{MY_IP}:19003/media/"
 
+
+if MODE == "PRODUCTION":
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
