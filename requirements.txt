@@ -13,7 +13,6 @@ inflection==0.5.1
 jsonschema==4.20.0
 jsonschema-specifications==2023.11.1
 netifaces==0.11.0
-packaging==23.2
 Pillow==10.1.0
 python-dotenv==1.0.0
 python-magic==0.4.27
