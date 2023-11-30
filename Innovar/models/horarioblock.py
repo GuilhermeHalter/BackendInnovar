@@ -1,10 +1,13 @@
 from django.db import models
 
 class HorariosBloqueados(models.Model):
-    Horario = models.DateField()
+    data = models.DateField()
+    hora_inicio = models.TimeField()
+    hora_fim = models.TimeField()
 
     def __str__(self):
-        return self.Horario
+        return f"{self.data} - {self.hora_inicio} até {self.hora_fim}"
+
+
     
-    class Meta:
-        verbose_name_plural = "Horarios_Bloqueados"
+    
